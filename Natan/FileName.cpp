@@ -15,24 +15,123 @@ int main() {
 
 
 
-	struct smth {
-		int local;
-		int x;
 
-		int y;
-		int width;
-		int height;
+	struct loc {
+		string name;
+		string desc;
+
+		int id;
+		
+		
 
 	};
-	smth box;
-	string t[4] = { "1 Бездна", "2 Город", "3 Пустыня", "4 Канава" };
-	
-	for (int i = 0; i < 4; i++) {
-		cout << t[i] << endl;
+	struct Hero 
+	{
+			string name;
+			int current_loc;
+			int hp;
+			int dmg;
+			int wallet;
 
-	}
-	cin >> box.local;
-	cout << t[box.local - 1];
+	};
+
+	struct enemy {
+		string name;
+		string desc;
+		int hp;
+		int dmg;
+		int award;
+		int current_loc;
+	};
+	loc location[4];
+	location[0].name = "Бездна";
+	location[0].desc = "Добро пожаловать в бездну";
+	location[0].id = 1;
+	location[1].name = "Город";
+	location[1].desc = "Добро пожаловать в Город";
+	location[1].id = 2;
+	location[2].name = "Пустыня";
+	location[2].desc = "Добро пожаловать в пустыню";
+	location[2].id = 3;
+	location[3].name = "Канава";
+	location[3].desc = "Добро пожаловать в Канаву";
+	location[3].id = 4;
+
+	Hero stats;
+	stats.hp = 100;
+	stats.name = "Berserk";
+	stats.current_loc = 1;
+	stats.dmg = 50;
+
+	enemy boss[2];
+	boss[0].name = "goblinjunior";
+	boss[0].desc = "У него 120 хп и малое количество урона";
+	boss[0].hp = 90;
+	boss[0].dmg = 20;
+	boss[0].award = 30;
+	boss[0].current_loc = 1;
+
+	boss[1].name = "varvar";
+	boss[1].desc = "У него 150 хп и среднее количество урона";
+	boss[1].hp = 120;
+	boss[1].dmg = 30;
+	boss[1].award = 50;
+	boss[1].current_loc = 2;
+
+
+	while (stats.hp > 0) {
+		for (int i= 0; i < 4; i++) {
+			cout << location[i].name << endl;
+		}
+
+		int choice;
+		cin >> choice;
+		if (choice == stats.current_loc) {
+		cout << "Ты и так здесь" << endl; 
+		}
+		else
+		{
+			cout << location[choice - 1].name << endl;
+			cout << location[choice - 1].desc <<endl; 
+			stats.current_loc = choice;
+		}
+		if (boss[0].current_loc == stats.current_loc) {
+			cout << boss[0].desc << endl;
+			while (boss[0].hp > 0) {
+				cout << boss[0].hp;
+				int chosefight ;
+				cin >> chosefight ;
+				if (chosefight == 1) {
+					boss[0].hp -= stats.dmg;
+				}
+				else { 
+					srand(time(0));
+					int chance = rand() % 100;
+					if (chance < 5) {
+						cout << "Ты успешно избежал боя" << endl;
+						break;
+					}
+					else {
+						cout << "Тебе не повезло и ты вступаешь в бой" << endl;
+					}
+
+				}
+			}
+		}
+
+	} 
+
+
+
+
+	//string t[4] = { "1 Бездна", "2 Город", "3 Пустыня", "4 Канава" };
+	//
+	//for (int i = 0; i < 4; i++) {
+	//	cout << t[i] << endl;
+
+	//}
+	//cin >> box.local;
+	//cout << t[box.local - 1];
 
 //	int money;
 //	string t[6] = { "1 молоко", "2 макароны", "3 масло", "4 сыр", "5 сок", "6 сосиски" };
